@@ -109,8 +109,11 @@ if __name__ == '__main__':
     train_data.drop(columns_to_del, axis=1, inplace=True)
     test_data.drop(columns_to_del, axis=1, inplace=True)
     
-    # train
-    prior, posterier = train(train_data)
-    # test
-    result = evaluate(test_data, prior, posterier)
-    print(result)
+    total_result = []
+    for i in range(1): 
+        prior, posterier = train(train_data)
+        print(prior)
+        result = evaluate(test_data, prior, posterier)
+        total_result.append(list(result))
+    total_result = np.asarray(total_result)
+    print(np.mean(total_result, axis=0), np.max(total_result, axis=0), np.min(total_result, axis=0))
